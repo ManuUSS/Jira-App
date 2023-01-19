@@ -1,10 +1,11 @@
-import { FC } from "react"
-
-const HomePage: FC = () => {
+import { Layout } from "components/layout";
+import { NextPage } from "next";
+import { Typography } from '@mui/material'
+const HomePage: NextPage = () => {
   return (
-    <>
-      <h1>Hola Mundo</h1>
-    </>
+    <Layout>
+      <Typography variant='h1' color='primary'>Hola Mundo</Typography>
+    </Layout>
   )
 }
 
