@@ -45,8 +45,18 @@ export const EntriesProvider:FC<Props> = ({ children }) => {
         return entries;
     }
 
+    const addNewEntry = ( description:string ) => {
+        const newEntry : Entry = {
+            _id: uuidv4(),
+            description,
+            createdAt: Date.now(),
+            status: 'pending'
+        }
+        dispatch({ type: '[Entries] - Add New Entry', payload: newEntry });
+    }
+
     return (
-        <EntriesContext.Provider value={{ ...state, getEntriesByStatus }}>
+        <EntriesContext.Provider value={{ ...state, getEntriesByStatus, addNewEntry }}>
             {children}
         </EntriesContext.Provider>
     )

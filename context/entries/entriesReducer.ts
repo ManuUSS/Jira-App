@@ -1,17 +1,18 @@
 import { EntriesState } from './';
-import { EntryStatus } from '../../types/entry';
+import { EntryStatus, Entry } from '../../types/entry';
 type EntriesActionType = 
-{ type: '[Entries] - Pending by status', payload:EntryStatus } 
+{ type: '[Entries] - Add New Entry', payload: Entry } 
 | { type: '[Entries] - In Progress Entries', payload:EntryStatus } 
 | { type: '[Entries] - Done Entries', payload:EntryStatus } 
 
 export const entriesReducer = ( state: EntriesState, action:EntriesActionType ): EntriesState => {
     
     switch ( action.type ) {
-        case '[Entries] - Pending by status':
+        case '[Entries] - Add New Entry':
             
             return {
-                ...state
+                ...state,
+                entries: [ ...state.entries, action.payload ]
             }
         
         default:
