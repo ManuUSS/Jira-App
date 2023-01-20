@@ -10,3 +10,9 @@ MongoDB URL Local
 ````
 mongodb://localhost:27017entriesdb
 ````
+
+## Llenar la base de datos con información de prueba
+Llamar a:
+````
+http://localhost:3000/api/seed
+````
