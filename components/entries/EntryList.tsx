@@ -21,7 +21,10 @@ export const EntryList:FC<Props> = ({ status }) => {
 
     return (
     <div>
-        <Paper sx={{ height: 'calc(100%vh - 250px)', overflow: 'scroll', backgroundColor: 'transparent', padding: '5px' }}>
+        <Paper
+             
+            sx={{ height: 'calc(100%vh - 250px)', overflowY: 'scroll', backgroundColor: 'transparent', paddingX: '5px', boxShadow: 'none ' }}
+        >
             <List sx={{ opacity: 1 }}>
                 {
                     entriesCard.map((entry) => (

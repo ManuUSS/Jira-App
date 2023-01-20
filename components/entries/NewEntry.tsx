@@ -1,6 +1,6 @@
 import { Box, Button, TextField } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CloseIcon from '@mui/icons-material/Close';
+import SaveIcon from '@mui/icons-material/Save';
 
 export const NewEntry = () => {
   return (
@@ -24,15 +24,14 @@ export const NewEntry = () => {
         <Box display='flex' justifyContent='space-between'>
             <Button
                 variant="text"
-                color="warning"
-                endIcon={ <CloseIcon /> }
+                color="info"
             >
                 Cancelar
             </Button>
             <Button
                 variant="outlined"
                 color="secondary"
-                endIcon={ <AddCircleIcon /> }
+                endIcon={ <SaveIcon /> }
             >
                 Guardar
             </Button>

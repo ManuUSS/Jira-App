@@ -8,13 +8,16 @@ export const lightTheme = createTheme({
             default: grey[300]
         },
         primary: {
-            main: '#4a148c'
+            main: '#dda15e'
         },
         secondary: {
             main: '#19857b'
         },
         error: {
             main: red.A400
+        },
+        info: {
+            main: '#457b9d'
         },
         text: {
             primary: '#212529'
