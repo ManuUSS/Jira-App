@@ -13,8 +13,8 @@ interface Props {
 
 export const EntryList:FC<Props> = ({ status }) => {
   
-    const { entries, getEntriesByStatus } = useContext( EntriesContext );
-    const { isDragging } = useContext( UIContext );
+    const { entries, getEntriesByStatus, updateEntry } = useContext( EntriesContext );
+    const { isDragging, endDragging } = useContext( UIContext );
     const [ entriesCard, setEntriesCard ] = useState<Entry[]>([]);
     
     useEffect(() => {
@@ -24,6 +24,10 @@ export const EntryList:FC<Props> = ({ status }) => {
 
     const onDropEntry = ( event: DragEvent<HTMLDivElement>) => {
         const id = event.dataTransfer.getData('text');
+        const entry = entries.find( ( e ) => e._id === id )!;
+        entry.status = status;
+        updateEntry( entry );
+        endDragging();
     }
 
     const allowDrop = ( event:DragEvent<HTMLDivElement> ) => {
