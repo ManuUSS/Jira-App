@@ -3,14 +3,15 @@ import { Box, Button, TextField } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SaveIcon from '@mui/icons-material/Save';
 import { EntriesContext } from '../../context/entries/EntriesContext';
+import { UIContext } from '../../context/ui/UIContext';
 
 export const NewEntry = () => {
 
-    const [isAdding, setIsAdding] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [touched, setTouched] = useState(false);
 
     const { addNewEntry } = useContext( EntriesContext );
+    const { isAddingEntry, setIsAddingEntry } = useContext( UIContext );
 
     const onInputChanged = ( event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
         setInputValue( event.target.value );
@@ -21,7 +22,7 @@ export const NewEntry = () => {
         if( inputValue.length < 5 ) return;
 
         addNewEntry( inputValue );
-        setIsAdding( false );
+        setIsAddingEntry( false );
         setTouched( false );
         setInputValue('');
     }
@@ -30,7 +31,7 @@ export const NewEntry = () => {
     <Box sx={{ marginBottom: 2, paddingX: 1 }}>
         
         {
-            isAdding ? (
+            isAddingEntry ? (
                 <>
                     <TextField 
                         fullWidth
@@ -49,7 +50,7 @@ export const NewEntry = () => {
                         <Button
                             variant="text"
                             color="info"
-                            onClick={ () => setIsAdding(false) }
+                            onClick={ () => setIsAddingEntry( false ) }
                         >
                             Cancelar
                         </Button>
@@ -69,7 +70,7 @@ export const NewEntry = () => {
                     startIcon={<AddCircleIcon />}
                     fullWidth
                     variant="outlined"
-                    onClick={ () => setIsAdding( true )}
+                    onClick={ () => setIsAddingEntry( true )}
                 >
                     Agregar tarea
                 </Button>
