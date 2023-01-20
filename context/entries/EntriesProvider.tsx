@@ -2,6 +2,7 @@ import { FC, useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Entry } from 'types';
 import { EntriesContext, entriesReducer } from './';
+import { EntryStatus } from '../../types/entry';
 
 
 export interface EntriesState {
@@ -12,19 +13,19 @@ const ENTRIES_INITIAL_STATE: EntriesState = {
     entries: [
         {
             _id: uuidv4(),
-            description: 'Lorem kuygv toak kal main srpep pero.',
+            description: 'Pending: Lorem kuygv toak kal main srpep pero.',
             status: 'pending',
             createdAt: Date.now()
         },
         {
             _id: uuidv4(),
-            description: 'Khn juo mioto perro saic o perm y ta.',
+            description: 'In Progress: Khn juo mioto perro saic o perm y ta.',
             status: 'in-progress',
             createdAt: Date.now() * 1.3
         },
         {
             _id: uuidv4(),
-            description: 'Kuiyn na dtop pero kmau jun gla por.',
+            description: 'Done: Kuiyn na dtop pero kmau jun gla por.',
             status: 'finished',
             createdAt: Date.now() * 1.5
         }
@@ -39,8 +40,13 @@ export const EntriesProvider:FC<Props> = ({ children }) => {
 
     const [ state, dispatch ] = useReducer( entriesReducer, ENTRIES_INITIAL_STATE );
 
+    const getEntriesByStatus = ( status: EntryStatus ): Entry[] => {
+        const entries = state.entries.filter( ( entry ) => entry.status === status );
+        return entries;
+    }
+
     return (
-        <EntriesContext.Provider value={{ ...state }}>
+        <EntriesContext.Provider value={{ ...state, getEntriesByStatus }}>
             {children}
         </EntriesContext.Provider>
     )
