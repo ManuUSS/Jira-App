@@ -16,14 +16,17 @@ export const lightTheme = createTheme({
         error: {
             main: red.A400
         },
+        text: {
+            primary: '#212529'
+        }
     },
     components: {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#ccd5ae'
+                    backgroundColor: '#588157'
                 }
             }
-        }
+        },
     }
 })
