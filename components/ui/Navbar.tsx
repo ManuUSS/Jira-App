@@ -14,7 +14,7 @@ export const Navbar = () => {
             <IconButton sx={{ color: '#ffffff' }} onClick={ openSideMenu }>
                 <MenuIcon />
             </IconButton>
-            <Typography variant='h6'>Open Jira</Typography>
+            <Typography variant='h5' color='white'>Open Jira</Typography>
         </Toolbar>
     </AppBar>
   )

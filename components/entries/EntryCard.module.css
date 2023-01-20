@@ -1,0 +1,19 @@
+.pending{
+    color: '#e63946';
+    width: 10px;
+    height: 10px;
+    
+} 
+
+.in-progress {
+    color: '#52b788';
+    width: 10px;
+    height: 10px;
+    
+}
+
+.finished{
+    color: '#457b9d';
+    width: 10px;
+    height: 10px;
+}
