@@ -1,8 +1,11 @@
 import { DragEvent, FC, useContext, useEffect, useState } from 'react';
 import { List, Paper } from "@mui/material"
+import { UIContext } from '../../context/ui/UIContext';
+import { EntriesContext } from '../../context/entries/EntriesContext';
 import { Entry, EntryStatus } from "types"
 import { EntryCard } from "./"
-import { EntriesContext } from '../../context/entries/EntriesContext';
+
+import styles from './EntryList.module.css';
 
 interface Props {
     status: EntryStatus;
@@ -11,6 +14,7 @@ interface Props {
 export const EntryList:FC<Props> = ({ status }) => {
   
     const { entries, getEntriesByStatus } = useContext( EntriesContext );
+    const { isDragging } = useContext( UIContext );
     const [ entriesCard, setEntriesCard ] = useState<Entry[]>([]);
     
     useEffect(() => {
@@ -30,12 +34,12 @@ export const EntryList:FC<Props> = ({ status }) => {
     <div 
         onDrop={ onDropEntry }
         onDragOver={ allowDrop }
-    >
+        className={ isDragging ? styles.dragging : '' }
+    >   
         <Paper
-             
-            sx={{ height: 'calc(100%vh - 250px)', overflowY: 'scroll', backgroundColor: 'transparent', paddingX: '5px', boxShadow: 'none ' }}
+            sx={{ height: 'calc(100vh - 120px)',  backgroundColor: 'transparent', paddingX: '5px', boxShadow: 'none ' }}
         >
-            <List sx={{ opacity: 1 }}>
+            <List sx={{ opacity: isDragging ? 0.5 : 1,  transition: 'all .3s ease-in'}}>
                 {
                     entriesCard.map((entry) => (
                         <EntryCard key={ entry._id } entry={ entry }/>
