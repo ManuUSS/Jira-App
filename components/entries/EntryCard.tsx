@@ -35,9 +35,12 @@ export const EntryCard: FC<Props> = ({ entry }) => {
           <Typography sx={{ whiteSpace: 'pre-line' }}>{ entry.description }</Typography>
         </CardContent>
         <CardActions sx={{ display: 'flex', justifyContent: 'end', paddingRight: 2, alignItems: 'center', gap: '10px' }}>
-          <Badge color={ statusEntry === 'pending' ? 'error' : statusEntry === 'finished' ? 'success' : 'info' } variant="dot"  anchorOrigin={{ vertical: 'top', horizontal: 'left' }}>
-            <Typography variant="body2">Hace 15 Minutos</Typography>
-          </Badge>
+          <Badge 
+            color={ statusEntry === 'pending' ? 'error' : statusEntry === 'finished' ? 'success' : 'info' } 
+            variant="dot"  
+            anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+          />
+          <Typography variant="body2">Hace 15 Minutos</Typography>
         </CardActions>
       </CardActionArea>
     </Card>
