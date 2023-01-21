@@ -1,3 +1,4 @@
+import { useState, ChangeEvent } from 'react';
 import { Button, capitalize, Card, CardActions, CardContent, CardHeader, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import { Layout } from '../../../components/layout/Layout';
 import SaveIcon from '@mui/icons-material/Save';
@@ -7,6 +8,23 @@ import { EntryStatus } from 'types';
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
 const EntryPage = () => {
+
+    const [inputValue, setInputValue] = useState('');
+    const [status, setStatus] = useState<EntryStatus>('pending');
+    const [touched, setTouched] = useState(false);
+
+    const onInputChanged = ( event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
+        setInputValue( event.target.value );
+    }
+
+    const onStatusChanged = ( event:ChangeEvent<HTMLInputElement> ) => {
+        setStatus( event.target.value as EntryStatus );
+    }
+    
+    const onSave = () => {
+        
+    }
+
   return (
     <Layout title='Siu'>
         <>
@@ -14,7 +32,7 @@ const EntryPage = () => {
                 <Grid item xs={ 12 } sm={ 8 } md={ 6 }>
                     <Card>
                         <CardHeader
-                            title="Entrada:"
+                            title={`Entrada: ${inputValue}`}
                             subheader={`Creada hace: ...  minutos`}
                         />
                         <CardContent>
@@ -25,11 +43,15 @@ const EntryPage = () => {
                                 label='Nueva entrada'
                                 autoFocus
                                 multiline
+                                value={inputValue}
+                                onChange={ onInputChanged }
                             />
                             <FormControl>
                                 <FormLabel>Estado:</FormLabel>
                                 <RadioGroup
                                     row
+                                    value={ status }
+                                    onChange={ onStatusChanged }
                                 >
                                     {
                                         validStatus.map( (option) => (
@@ -48,6 +70,7 @@ const EntryPage = () => {
                                 startIcon={ <SaveIcon /> }
                                 variant='contained'
                                 fullWidth
+                                onClick={ onSave }
                             >
                                 Guardar
                             </Button>
