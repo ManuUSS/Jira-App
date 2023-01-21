@@ -1,4 +1,5 @@
 import { FC, useReducer, useEffect } from 'react';
+import { useSnackbar } from 'notistack'
 import { Entry } from 'types';
 import { EntriesContext, entriesReducer } from './';
 import { EntryStatus } from '../../types/entry';
@@ -20,6 +21,8 @@ interface Props {
 export const EntriesProvider:FC<Props> = ({ children }) => {
 
     const [ state, dispatch ] = useReducer( entriesReducer, ENTRIES_INITIAL_STATE );
+    const { enqueueSnackbar } = useSnackbar();
+
 
     const getEntriesByStatus = ( status: EntryStatus ): Entry[] => {
         const entries = state.entries.filter( ( entry ) => entry.status === status );
@@ -37,6 +40,14 @@ export const EntriesProvider:FC<Props> = ({ children }) => {
         try {
             const { data } = await entriesApi.put<Entry>(`/entries/${ _id }`, { description, status } );
             dispatch({ type: '[Entries] - Updated Entry', payload: data });
+            enqueueSnackbar('Entrada actualizada', {
+                variant: 'success',
+                autoHideDuration: 1500,
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right'
+                }
+            })
         } catch ( error ) {
             console.log( error );
         }
