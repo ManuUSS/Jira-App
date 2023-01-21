@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, useMemo, ChangeEvent } from 'react';
 import { Button, capitalize, Card, CardActions, CardContent, CardHeader, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import { Layout } from '../../../components/layout/Layout';
 import SaveIcon from '@mui/icons-material/Save';
@@ -13,6 +13,8 @@ const EntryPage = () => {
     const [status, setStatus] = useState<EntryStatus>('pending');
     const [touched, setTouched] = useState(false);
 
+    const isNotValid = useMemo(() => inputValue.length <= 5 && touched, [ inputValue, touched ]);
+
     const onInputChanged = ( event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
         setInputValue( event.target.value );
     }
@@ -22,7 +24,7 @@ const EntryPage = () => {
     }
     
     const onSave = () => {
-        
+
     }
 
   return (
@@ -44,7 +46,10 @@ const EntryPage = () => {
                                 autoFocus
                                 multiline
                                 value={inputValue}
+                                helperText={ isNotValid && 'Ingrese un valor' }
                                 onChange={ onInputChanged }
+                                onBlur={() => setTouched(true)}
+                                error={ isNotValid }
                             />
                             <FormControl>
                                 <FormLabel>Estado:</FormLabel>
@@ -71,6 +76,7 @@ const EntryPage = () => {
                                 variant='contained'
                                 fullWidth
                                 onClick={ onSave }
+                                disabled={ inputValue.length <= 5 }
                             >
                                 Guardar
                             </Button>
