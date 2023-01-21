@@ -8,6 +8,7 @@ import { EntryStatus } from 'types';
 import { dbEntries } from 'database';
 import { Entry } from '../../../types/entry';
 import { EntriesContext } from '../../../context/entries/EntriesContext';
+import { getFormatDate } from 'utils/dateFunctions';
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
@@ -55,7 +56,7 @@ const EntryPage:FC<Props> = ({ entry }) => {
                     <Card>
                         <CardHeader
                             title={`Entrada:`}
-                            subheader={`Creada hace: ${ entry.createdAt } minutos`}
+                            subheader={`Creada hace: ${getFormatDate( entry.createdAt )} `}
                         />
                         <CardContent>
                             <TextField 

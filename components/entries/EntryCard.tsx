@@ -2,8 +2,9 @@ import { DragEvent, FC, useContext } from 'react';
 import { Badge, Card, CardActionArea, CardActions, CardContent, Typography } from "@mui/material";
 import { Entry } from '../../types/entry';
 import { UIContext } from '../../context/ui/UIContext';
-import styles from './EntryCard.module.css';
 import { useRouter } from 'next/router';
+import { getFormatDate } from '../../utils/dateFunctions';
+
 
 interface Props {
   entry: Entry
@@ -48,7 +49,7 @@ export const EntryCard: FC<Props> = ({ entry }) => {
             variant="dot"  
             anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
           />
-          <Typography variant="body2">Hace 15 Minutos</Typography>
+          <Typography variant="body2">{ getFormatDate(entry.createdAt) }</Typography>
         </CardActions>
       </CardActionArea>
     </Card>
